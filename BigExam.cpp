@@ -220,7 +220,8 @@ void Defeat()
          << "*                                *" << endl
          << "*                                *" << endl
          << "**********************************" << endl << endl << endl;
-
+    cout << "Opponent's card : " << OpponentCard[1] << " " << OpponentCard[2] << " " << OpponentCard[3] << " " << OpponentSubCard1 << " " << OpponentSubCard2 << " " << "(" << OpponentSum << ")" << endl;
+    cout << "Your card : " << YourCard[4] << " " << YourCard[5] << " " << YourCard[6] << " " << YourSubCard1 << " " << YourSubCard2 << " " << "(" << YourSum << ")" << endl;
 }
 
 
@@ -237,6 +238,8 @@ void Win()
          << "*                                *" << endl
          << "*                                *" << endl
          << "**********************************" << endl << endl << endl;
+    cout << "Opponent's card : " << OpponentCard[1] << " " << OpponentCard[2] << " " << OpponentCard[3] << " " << OpponentSubCard1 << " " << OpponentSubCard2 << " " << "(" << OpponentSum << ")" << endl;
+    cout << "Your card : " << YourCard[4] << " " << YourCard[5] << " " << YourCard[6] << " " << YourSubCard1 << " " << YourSubCard2 << " " << "(" << YourSum << ")" << endl;
 }
 void Draw()
 {
@@ -246,7 +249,8 @@ void Draw()
          << "*                                *" << endl
          << "*                                *" << endl
          << "**********************************" << endl << endl << endl;
-
+    cout << "Opponent's card : " << OpponentCard[1] << " " << OpponentCard[2] << " " << OpponentCard[3] << " " << OpponentSubCard1 << " " << OpponentSubCard2 << " " << "(" << OpponentSum << ")" << endl;
+    cout << "Your card : " << YourCard[4] << " " << YourCard[5] << " " << YourCard[6] << " " << YourSubCard1 << " " << YourSubCard2 << " " << "(" << YourSum << ")" << endl;
 }
 
 
@@ -259,14 +263,12 @@ void CheckStatus()
     if(YourSum>21)
         {
     Defeat();
-    cout << "Opponent's card : " << OpponentCard[1] << " " << OpponentCard[2] << " " << OpponentCard[3] << " " << OpponentSubCard1 << " " << OpponentSubCard2 << " " << "(" << OpponentSum << ")" << endl;
-    cout << "Your card : " << YourCard[4] << " " << YourCard[5] << " " << YourCard[6] << " " << YourSubCard1 << " " << YourSubCard2 << " " << "(" << YourSum << ")" << endl;
+
         }
     else if (OpponentSum>21&&YourSum<=21)
         {
     Win();
-    cout << "Opponent's card : " << OpponentCard[1] << " " << OpponentCard[2] << " " << OpponentCard[3] << " " << OpponentSubCard1 << " " << OpponentSubCard2 << " " << "(" << OpponentSum << ")" << endl;
-    cout << "Your card : " << YourCard[4] << " " << YourCard[5] << " " << YourCard[6] << " " << YourSubCard1 << " " << YourSubCard2 << " " << "(" << YourSum << ")" << endl;
+
         }
 }
 
@@ -278,21 +280,15 @@ void Stay()
     if (YourSum>OpponentSum)
     {
     Win();
-    cout << "Opponent's card : " << OpponentCard[1] << " " << OpponentCard[2] << " " << OpponentCard[3] << " " << OpponentSubCard1 << " " << OpponentSubCard2 << " " << "(" << OpponentSum << ")" << endl;
-    cout << "Your card : " << YourCard[4] << " " << YourCard[5] << " " << YourCard[6] << " " << YourSubCard1 << " " << YourSubCard2 << " " << "(" << YourSum << ")" << endl;
         }
     else if(YourSum<OpponentSum)
         {
     Defeat();
-    cout << "Opponent's card : " << OpponentCard[1] << " " << OpponentCard[2] << " " << OpponentCard[3] << " " << OpponentSubCard1 << " " << OpponentSubCard2 << " " << "(" << OpponentSum << ")" << endl;
-    cout << "Your card : " << YourCard[4] << " " << YourCard[5] << " " << YourCard[6] << " " << YourSubCard1 << " " << YourSubCard2 << " " << "(" << YourSum << ")" << endl;
         }
     else if (YourSum==OpponentSum)
     {
         {
     Draw();
-    cout << "Opponent's card : " << OpponentCard[1] << " " << OpponentCard[2] << " " << OpponentCard[3] << " " << OpponentSubCard1 << " " << OpponentSubCard2 << " " << "(" << OpponentSum << ")" << endl;
-    cout << "Your card : " << YourCard[4] << " " << YourCard[5] << " " << YourCard[6] << " " << YourSubCard1 << " " << YourSubCard2 << " " << "(" << YourSum << ")" << endl;
         }
     }
 }
