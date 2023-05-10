@@ -12,10 +12,12 @@ using namespace std;
     "2\x04", "3\x04", "4\x04", "5\x04", "6\x04", "7\x04", "8\x04", "9\x04", "10\x04", "J\x04", "Q\x04", "K\x04", "A\x04", "2\x05", "3\x05", "4\x05", "5\x05", "6\x05", "7\x05", "8\x05", "9\x05", "10\x05", "J\x05", "Q\x05", "K\x05", "A\x05",
 };
 
-string OpponentCard1,OpponentCard2,OpponentCard3, OpponentSubCard1, OpponentSubCard2;
-string YourCard1,YourCard2,YourCard3, YourSubCard1, YourSubCard2;
+string OpponentCard[100], OpponentSubCard1, OpponentSubCard2;
+string YourCard[100], YourSubCard1, YourSubCard2;
 string test;
-int OpponentSum=0, YourSum=0;;
+int randomIndex[100];
+int OpponentSum=0, YourSum=0;
+int OpponentFakeSum=0;
 int CardCount=51;
 void RemoveCard()
 {
@@ -31,89 +33,69 @@ void RemoveCard()
 void Start()
 {
 cout << "ROUND 1 " << endl << endl;
-srand((int)time(0));
-int randomIndex1 = rand() % CardCount;
-test=CardBox[randomIndex1];
-OpponentCard1=test;
-RemoveCard();
-CardCount --;
-int randomIndex2 = rand() % CardCount;
-test=CardBox[randomIndex2];
-OpponentCard2=test;
-RemoveCard();
-CardCount --;
-int randomIndex3 = rand() % CardCount;
-test=CardBox[randomIndex3];
-OpponentCard3=test;
-RemoveCard();
-CardCount --;
-cout << "Opponent's card : " << OpponentCard1 << " " << "?" << " " << "?" << " " << endl;
-int randomIndex4 = rand() % CardCount;
-test=CardBox[randomIndex4];
-YourCard1=test;
-RemoveCard();
-CardCount --;
-int randomIndex5 = rand() % CardCount;
-test=CardBox[randomIndex5];
-YourCard2=test;
-RemoveCard();
-CardCount --;
-int randomIndex6 = rand() % CardCount;
-test=CardBox[randomIndex6];
-YourCard3=test;
-RemoveCard();
-CardCount --;
-cout << "Your card : " << YourCard1 << " " << YourCard2 << " " << YourCard3 << " " << endl;
+
+    for (int i=1;i<=3;i++)
+    {
+        randomIndex[i] = rand() % CardCount;
+        test=CardBox[randomIndex[i]];
+        OpponentCard[i]=test;
+        RemoveCard();
+        CardCount --;
+    }
+
+
+
+    for (int j=4;j<=6;j++)
+    {
+        randomIndex[j] = rand() % CardCount;
+        test=CardBox[randomIndex[j]];
+        YourCard[j]=test;
+        RemoveCard();
+        CardCount --;
+    }
+
+
 }
 
-
-
+char sub[100];
 void CountOpponentSum()
 {
-    char sub1 = OpponentCard1.front();
-    if ('2'<=sub1&&sub1<='9')
+    for (int k=1;k<=3;k++)
     {
-    OpponentSum= OpponentSum + (sub1 -'0');
+    sub[k] = OpponentCard[k].front();
+    if ('2'<=sub[k]&&sub[k]<='9')
+    {
+    OpponentSum= OpponentSum + (sub[k] -'0');
     }
     else OpponentSum = OpponentSum + 5;
-
-    char sub2 = OpponentCard2.front();
-    if ('2'<=sub2&&sub2<='9')
-    {
-    OpponentSum= OpponentSum + (sub2 -'0');
     }
-    else OpponentSum = OpponentSum + 5;
 
 
-    char sub3 = OpponentCard3.front();
-    if ('2'<=sub3&&sub3<='9')
+    if ('2'<=sub[1]&&sub[1]<='9')
     {
-    OpponentSum= OpponentSum + (sub3 -'0');
+    OpponentFakeSum= OpponentFakeSum + (sub[1] -'0');
     }
-    else OpponentSum = OpponentSum + 5;
+    else OpponentFakeSum = OpponentFakeSum + 5;
+
+
+    cout << "Opponent's card : " << OpponentCard[1] << " " << "?" << " " << "?" << " " "(" << OpponentFakeSum << ")" << endl;
+
 }
+
+
+
 void CountYourSum()
 {
-    char sub4 = YourCard1.front();
-    if ('2'<=sub4&&sub4<='9')
+    for (int l=4;l<=6;l++)
     {
-    YourSum= YourSum + (sub4 -'0');
+   sub[l] = YourCard[l].front();
+    if ('2'<=sub[l]&&sub[l]<='9')
+    {
+    YourSum= YourSum + (sub[l] -'0');
     }
     else YourSum = YourSum + 5;
-
-    char sub5 = YourCard2.front();
-    if ('2'<=sub5&&sub5<='9')
-    {
-    YourSum= YourSum + (sub5 -'0');
     }
-    else YourSum = YourSum + 5;
-
-    char sub6 = YourCard3.front();
-    if ('2'<=sub6&&sub6<='9')
-    {
-    YourSum= YourSum + (sub6 -'0');
-    }
-    else YourSum = YourSum + 5;
+    cout << "Your card : " << YourCard[4] << " " << YourCard[5] << " " << YourCard[6] << " " << "(" << YourSum << ")" << endl;
 }
 
 
@@ -122,57 +104,91 @@ void CountYourSum()
 
 void GetMoreCard1()
 {
-srand((int)time(0));
-int randomIndex7 = rand() % CardCount;
-test=CardBox[randomIndex7];
+
+randomIndex[7] = rand() % CardCount;
+test=CardBox[randomIndex[7]];
 OpponentSubCard1=test;
 RemoveCard();
 CardCount --;
-cout << "Opponent's card : " << OpponentCard1 << " " << OpponentCard2 << " " << "?" << " " << "?" << " " << endl;
 
-int randomIndex8 = rand() % CardCount;
-test=CardBox[randomIndex8];
+
+randomIndex[8] = rand() % CardCount;
+test=CardBox[randomIndex[8]];
 YourSubCard1=test;
 RemoveCard();
 CardCount --;
-cout << "Your card : " << YourCard1 << " " << YourCard2 << " " << YourCard3 << " " << YourSubCard1 << endl;
+
 }
+
+
+
+
+
+
+
+
+
+
 void CountSumAfterFirstHit()
 {
-    char sub7 = OpponentSubCard1.front();
-    if ('2'<=sub7&&sub7<='9')
+    sub[1] = OpponentSubCard1.front();
+    if ('2'<=sub[1]&&sub[1]<='9')
     {
-    OpponentSum= OpponentSum + (sub7 -'0');
+    OpponentSum= OpponentSum + (sub[1] -'0');
     }
     else OpponentSum = OpponentSum + 5;
 
-    char sub8 = YourSubCard1.front();
-    if ('2'<=sub8&&sub8<='9')
+    if ('2'<=sub[2]&&sub[2]<='9')
     {
-    YourSum= YourSum + (sub8 -'0');
+    OpponentFakeSum= OpponentFakeSum + (sub[2] -'0');
+    }
+    else OpponentFakeSum = OpponentFakeSum + 5;
+
+
+cout << "Opponent's card : " << OpponentCard[1] << " " << OpponentCard[2] << " " << "?" << " " << "?" << " " << "(" << OpponentFakeSum << ")" << endl;
+
+
+    sub[2] = YourSubCard1.front();
+    if ('2'<=sub[2]&&sub[2]<='9')
+    {
+    YourSum= YourSum + (sub[2] -'0');
     }
     else YourSum = YourSum + 5;
+
+cout << "Your card : " << YourCard[4] << " " << YourCard[5] << " " << YourCard[6] << " " << YourSubCard1 << " " << "(" << YourSum << ")" <<  endl;
+
 }
+
+
+
+
 
 
 
 void GetMoreCard2()
 {
-srand((int)time(0));
-int randomIndex9 = rand() % CardCount;
-test=CardBox[randomIndex9];
+
+randomIndex[9] = rand() % CardCount;
+test=CardBox[randomIndex[9]];
 OpponentSubCard2=test;
 RemoveCard();
 CardCount --;
-cout << "Opponent's card : " << OpponentCard1 << " " << OpponentCard2 << " " << "?" << " " << "?" << " " << "?" << " " << endl;
+cout << "Opponent's card : " << OpponentCard[1] << " " << OpponentCard[2] << " " << "?" << " " << "?" << " " << "?" << " " << endl;
 
-int randomIndex10 = rand() % CardCount;
-test=CardBox[randomIndex10];
+randomIndex[10] = rand() % CardCount;
+test=CardBox[randomIndex[10]];
 YourSubCard2=test;
 RemoveCard();
 CardCount --;
-cout << "Your card : " << YourCard1 << " " << YourCard2 << " " << YourCard3 << " " << YourSubCard1 << " " << YourSubCard2 << endl;
+cout << "Your card : " << YourCard[4] << " " << YourCard[5] << " " << YourCard[6] << " " << YourSubCard1 << " " << YourSubCard2 << endl;
 }
+
+
+
+
+
+
+
 void CountSumAfterSecondHit()
 {
     char sub9 = OpponentSubCard2.front();
@@ -191,6 +207,11 @@ void CountSumAfterSecondHit()
 }
 
 
+
+
+
+
+
 void Defeat()
 {
     cout << "**********************************" << endl
@@ -201,6 +222,13 @@ void Defeat()
          << "**********************************" << endl << endl << endl;
 
 }
+
+
+
+
+
+
+
 void Win()
 {
     cout << "**********************************" << endl
@@ -231,14 +259,14 @@ void CheckStatus()
     if(YourSum>21)
         {
     Defeat();
-    cout << "Opponent's card : " << OpponentCard1 << " " << OpponentCard2 << " " << OpponentCard3 << " " << OpponentSubCard1 << " " << OpponentSubCard2 << endl;
-    cout << "Your card : " << YourCard1 << " " << YourCard2 << " " << YourCard3 << " " << YourSubCard1 << " " << YourSubCard2 << endl;
+    cout << "Opponent's card : " << OpponentCard[1] << " " << OpponentCard[2] << " " << OpponentCard[3] << " " << OpponentSubCard1 << " " << OpponentSubCard2 << " " << "(" << OpponentSum << ")" << endl;
+    cout << "Your card : " << YourCard[4] << " " << YourCard[5] << " " << YourCard[6] << " " << YourSubCard1 << " " << YourSubCard2 << " " << "(" << YourSum << ")" << endl;
         }
     else if (OpponentSum>21&&YourSum<=21)
         {
     Win();
-    cout << "Opponent's card : " << OpponentCard1 << " " << OpponentCard2 << " " << OpponentCard3 << " " << OpponentSubCard1 << " " << OpponentSubCard2 << endl;
-    cout << "Your card : " << YourCard1 << " " << YourCard2 << " " << YourCard3 << " " << YourSubCard1 << " " << YourSubCard2 << endl;
+    cout << "Opponent's card : " << OpponentCard[1] << " " << OpponentCard[2] << " " << OpponentCard[3] << " " << OpponentSubCard1 << " " << OpponentSubCard2 << " " << "(" << OpponentSum << ")" << endl;
+    cout << "Your card : " << YourCard[4] << " " << YourCard[5] << " " << YourCard[6] << " " << YourSubCard1 << " " << YourSubCard2 << " " << "(" << YourSum << ")" << endl;
         }
 }
 
@@ -250,21 +278,21 @@ void Stay()
     if (YourSum>OpponentSum)
     {
     Win();
-    cout << "Opponent's card : " << OpponentCard1 << " " << OpponentCard2 << " " << OpponentCard3 << " " << OpponentSubCard1 << " " << OpponentSubCard2 << endl;
-    cout << "Your card : " << YourCard1 << " " << YourCard2 << " " << YourCard3 << " " << YourSubCard1 << " " << YourSubCard2 << endl;
+    cout << "Opponent's card : " << OpponentCard[1] << " " << OpponentCard[2] << " " << OpponentCard[3] << " " << OpponentSubCard1 << " " << OpponentSubCard2 << " " << "(" << OpponentSum << ")" << endl;
+    cout << "Your card : " << YourCard[4] << " " << YourCard[5] << " " << YourCard[6] << " " << YourSubCard1 << " " << YourSubCard2 << " " << "(" << YourSum << ")" << endl;
         }
     else if(YourSum<OpponentSum)
         {
     Defeat();
-    cout << "Opponent's card : " << OpponentCard1 << " " << OpponentCard2 << " " << OpponentCard3 << " " << OpponentSubCard1 << " " << OpponentSubCard2 << endl;
-    cout << "Your card : " << YourCard1 << " " << YourCard2 << " " << YourCard3 << " " << YourSubCard1 << " " << YourSubCard2 << endl;
+    cout << "Opponent's card : " << OpponentCard[1] << " " << OpponentCard[2] << " " << OpponentCard[3] << " " << OpponentSubCard1 << " " << OpponentSubCard2 << " " << "(" << OpponentSum << ")" << endl;
+    cout << "Your card : " << YourCard[4] << " " << YourCard[5] << " " << YourCard[6] << " " << YourSubCard1 << " " << YourSubCard2 << " " << "(" << YourSum << ")" << endl;
         }
     else if (YourSum==OpponentSum)
     {
         {
     Draw();
-    cout << "Opponent's card : " << OpponentCard1 << " " << OpponentCard2 << " " << OpponentCard3 << " " << OpponentSubCard1 << " " << OpponentSubCard2 << endl;
-    cout << "Your card : " << YourCard1 << " " << YourCard2 << " " << YourCard3 << " " << YourSubCard1 << " " << YourSubCard2 << endl;
+    cout << "Opponent's card : " << OpponentCard[1] << " " << OpponentCard[2] << " " << OpponentCard[3] << " " << OpponentSubCard1 << " " << OpponentSubCard2 << " " << "(" << OpponentSum << ")" << endl;
+    cout << "Your card : " << YourCard[4] << " " << YourCard[5] << " " << YourCard[6] << " " << YourSubCard1 << " " << YourSubCard2 << " " << "(" << YourSum << ")" << endl;
         }
     }
 }
@@ -272,6 +300,7 @@ void Stay()
 
 int main()
 {
+srand((int)time(0));
 cout << "   ----------------------------------------Hello! Welcome to BLACKJACK 21!-----------------------------------------" << endl;
 Start();
 CountOpponentSum();
